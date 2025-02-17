@@ -25,6 +25,10 @@ app.post('/api/data', (req, res) => {
     co2: co2 || sensorData.co2,
     timestamp: new Date().toLocaleString()
   };
+
+  // Push the new reading to historicalData
+  historicalData.push(sensorData);
+
   console.log('Received sensor data:', sensorData);
   res.status(200).json({ message: 'Data received' });
 });
@@ -203,7 +207,6 @@ app.get('/', (req, res) => {
     </body>
     </html>
   `);
-});
 });
 
 app.listen(port, () => {
